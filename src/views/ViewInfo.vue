@@ -1,7 +1,17 @@
 <template>
     <div>
-        <h1 class="text-center">Petition info for ID: {{petition_id}}</h1>
-        <v-container fluid>
+        <v-app-bar
+                color="pink darken-4"
+                dense
+                dark
+                fixed
+        >
+            <v-btn icon to="/">
+                <v-icon>mdi-home</v-icon>
+            </v-btn>
+            <v-toolbar-title>Petition Data for petition ID: {{petition_id}}</v-toolbar-title>
+        </v-app-bar>
+        <v-container class="mt-12" fluid>
             <v-card
                     max-width="75%"
                     class="mx-auto"
