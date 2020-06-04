@@ -26,6 +26,11 @@
 <script>
     export default {
         name: 'DataTableCard',
+        data() {
+            return {
+                table_search: "",
+            }
+        },
         props: {
             card_max_width: {
                 type: String,
@@ -33,16 +38,16 @@
             },
             table_title: {
                 type: String,
-                default: "Table Title"
+                default: "Table Title",
+                required: true
             },
             table_data: {
-                type: Array
+                type: Array,
+                required: true
             },
             table_headers: {
-                type: Array
-            },
-            table_search: {
-                type: String
+                type: Array,
+                required: true
             }
         }
     }

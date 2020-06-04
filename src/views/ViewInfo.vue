@@ -3,16 +3,17 @@
         <ViewInfoAppBar :petition_id="petition_id"/>
         <v-container class="mt-12" fluid>
             <KeyInfoCard :action="action" :additional_info="additional_info" :background="background"
-                          :creator="creator" :total_signatures="total_signatures.toLocaleString()" card_max_width="1800px"/>
+                         :creator="creator" :total_signatures="total_signatures.toLocaleString()"
+                         card_max_width="1800px"/>
             <CardSpacer/>
-            <DataTableCard card_max_width="1800px" table_title="Signature Constituency Data" :table_data="constituency_data" :table_headers="constituency_headers"
-                          :table_search="constituency_search"/>
+            <DataTableCard card_max_width="1800px" table_title="Signature Constituency Data"
+                           :table_data="constituency_data" :table_headers="constituency_headers"/>
             <CardSpacer/>
-            <DataTableCard card_max_width="1800px" table_title="Signature Region Data" :table_data="region_data" :table_headers="region_headers"
-                           :table_search="region_search"/>
+            <DataTableCard card_max_width="1800px" table_title="Signature Region Data" :table_data="region_data"
+                           :table_headers="region_headers"/>
             <CardSpacer/>
-            <DataTableCard card_max_width="1800px" table_title="Signature Country Data" :table_data="country_data" :table_headers="country_headers"
-                           :table_search="country_search"/>
+            <DataTableCard card_max_width="1800px" table_title="Signature Country Data" :table_data="country_data"
+                           :table_headers="country_headers"/>
         </v-container>
         <Snackbar :modal="archived_petition_snackbar" color="pink"
                   text="Please note, this petition is archived, so data may be missing or incomplete."
