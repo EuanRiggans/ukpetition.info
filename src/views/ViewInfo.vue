@@ -101,16 +101,23 @@
                 ></v-data-table>
             </v-card>
         </v-container>
+        <Snackbar :modal="archived_petition_snackbar" color="pink"
+                  text="Please note, this petition is archived, so data may be missing or incomplete."
+                  v-bind:timeout="0"
+                  v-on:close-snackbar="closeArchivedPetitionSnackbar"/>
     </div>
 </template>
 
 <script>
     import axios from 'axios'
+    import Snackbar from '../components/Snackbar.vue';
 
     export default {
         name: "ViewInfo",
+        components: {Snackbar},
         data() {
             return {
+                archived_petition_snackbar: false,
                 action: null,
                 background: null,
                 additional_info: null,
@@ -189,11 +196,13 @@
             }
         },
         async mounted() {
-            console.log("[DEBUG] Petition ID is: " + this.petition_id);
             await axios
                 .get('https://petition.parliament.uk/petitions/' + this.petition_id + '.json')
                 .then((response) => {
                     const parsed = JSON.parse(JSON.stringify(response.data));
+                    if(parsed.data.type === "archived-petition") {
+                        this.archived_petition_snackbar = true;
+                    }
                     this.getKeyInfo(parsed);
                     this.getConstituencyInfo(parsed);
                     this.getRegionInfo(parsed);
@@ -257,7 +266,10 @@
                     // countryInfo.percentage_of_total_signatures = (countryData[country].signature_count / this.total_signatures) * 100;
                     this.country_data.push(countryInfo);
                 }
-            }
+            },
+            closeArchivedPetitionSnackbar() {
+                this.archived_petition_snackbar = false;
+            },
         }
     }
 </script>

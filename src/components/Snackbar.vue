@@ -1,6 +1,7 @@
 <template>
     <v-snackbar
             v-model="modal"
+            :timeout="timeout"
     >
         {{ text }}
         <v-btn
@@ -19,6 +20,10 @@
             modal: null,
             text: null,
             color: null,
+            timeout: {
+                type: Number,
+                default: 6000
+            }
         },
         methods: {
             closeSnackbar() {
