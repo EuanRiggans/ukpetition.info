@@ -15,11 +15,11 @@
                 </v-list-item>
 
                 <v-card-text>
-                    <b>Creator:</b> {{creator}} <br/><br/>
-                    <b>Action:</b> {{action}} <br/><br/>
-                    <b>Background:</b> {{background}} <br/><br/>
-                    <b>Additional Info:</b> {{additional_info}} <br/><br/>
-                    <b>Total Signatures:</b> {{total_signatures}} <br/><br/>
+                    <b>Creator:</b> {{creator}}<br/><br/>
+                    <b>Action:</b> {{action}}<br/><br/>
+                    <b>Background:</b> {{background}}<br/><br/>
+                    <b>Additional Info:</b> {{additional_info}}<br/><br/>
+                    <b>Total Signatures:</b> {{total_signatures.toLocaleString()}}<br/><br/>
                 </v-card-text>
             </v-card>
             <br>
@@ -126,10 +126,22 @@
                         align: 'start',
                         value: 'constituency_name',
                     },
-                    {text: 'ONS Code', value: 'ons_code'},
-                    {text: 'Constituency MP', value: 'mp'},
-                    {text: 'Signatures', value: 'signatures'},
-                    {text: 'Signatures (% of total)', value: 'percentage_of_total_signatures'}
+                    {
+                        text: 'ONS Code',
+                        value: 'ons_code'
+                    },
+                    {
+                        text: 'Constituency MP',
+                        value: 'mp'
+                    },
+                    {
+                        text: 'Signatures',
+                        value: 'signatures'
+                    },
+                    {
+                        text: 'Signatures (% of total)',
+                        value: 'percentage_of_total_signatures'
+                    }
                 ],
                 constituency_data: [],
                 region_headers: [
@@ -138,9 +150,18 @@
                         align: 'start',
                         value: 'region_name',
                     },
-                    {text: 'ONS Code', value: 'ons_code'},
-                    {text: 'Signatures', value: 'signatures'},
-                    {text: 'Signatures (% of total)', value: 'percentage_of_total_signatures'}
+                    {
+                        text: 'ONS Code',
+                        value: 'ons_code'
+                    },
+                    {
+                        text: 'Signatures',
+                        value: 'signatures'
+                    },
+                    {
+                        text: 'Signatures (% of total)',
+                        value: 'percentage_of_total_signatures'
+                    }
                 ],
                 region_data: [],
                 country_headers: [
@@ -149,8 +170,14 @@
                         align: 'start',
                         value: 'country_name',
                     },
-                    {text: 'Country code', value: 'country_code'},
-                    {text: 'Signatures', value: 'signatures'}
+                    {
+                        text: 'Country code',
+                        value: 'country_code'
+                    },
+                    {
+                        text: 'Signatures',
+                        value: 'signatures'
+                    }
                 ],
                 country_data: [],
             }
