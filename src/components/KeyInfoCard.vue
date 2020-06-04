@@ -13,10 +13,18 @@
 
         <v-card-text>
             <b>Creator:</b> {{creator}}<br/><br/>
+            <b>Petition Created:</b> {{created_date}}<br/><br/>
+            <b>Petition Opened:</b> {{opened_date}}<br/><br/>
             <b>Action:</b> {{action}}<br/><br/>
             <b>Background:</b> {{background}}<br/><br/>
             <b>Additional Info:</b> {{additional_info}}<br/><br/>
             <b>Total Signatures:</b> {{total_signatures}}<br/><br/>
+            <div v-for="department in departments" v-bind:key="department.acronym"><b>Responsible Department(s):</b>
+                {{department.name}} ({{department.acronym}})<br/><br/></div>
+            <div v-if="government_response === false"><b>Government Response:</b> The government has not yet responded to this
+                petition.<br/><br/></div>
+            <b>Petition State:</b> {{status}}<br/><br/>
+            <div v-if="status === 'closed'"><b>Petition Close Date:</b> {{petition_close_date}}<br/><br/></div>
         </v-card-text>
     </v-card>
 </template>
@@ -40,9 +48,30 @@
                 type: String,
                 default: "Petition Creator"
             },
+            created_date: {
+                type: String,
+                default: "00/00/0000"
+            },
+            opened_date: {
+                type: String,
+                default: "00/00/0000"
+            },
             total_signatures: {
                 type: String,
                 default: "0"
+            },
+            status: {
+                type: String,
+                default: "Unknown"
+            },
+            petition_close_date: {
+                type: String,
+            },
+            departments: {
+                type: Array,
+            },
+            government_response: {
+                type: Boolean,
             },
             card_max_width: {
                 type: String,

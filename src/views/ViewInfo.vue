@@ -3,9 +3,15 @@
         <ViewInfoAppBar :petition_id="petition_id"/>
         <v-container class="mt-12" fluid>
             <KeyInfoCard :action="action" :additional_info="additional_info" :background="background"
-                         :creator="creator" :total_signatures="total_signatures.toLocaleString()"
+                         :creator="creator" :created_date="created_date" :opened_date="opened_date"
+                         :total_signatures="total_signatures.toLocaleString()" :status="status"
+                         :departments="departments" :government_response="government_responded"
+                         :petition_close_date="close_date"
                          card_max_width="1800px"/>
             <CardSpacer/>
+            <GovernmentResponseCard v-if="government_responded" :response_summary="government_response_summary"
+                                    :response="government_response_text" :response_date="government_response_date"/>
+            <CardSpacer v-if="government_responded"/>
             <DataTableCard card_max_width="1800px" table_title="Signature Constituency Data"
                            :table_data="constituency_data" :table_headers="constituency_headers"/>
             <CardSpacer/>
@@ -33,10 +39,11 @@
     import CardSpacer from "../components/CardSpacer";
     import DataTableCard from "../components/DataTableCard";
     import ViewInfoAppBar from "../components/ViewInfoAppBar";
+    import GovernmentResponseCard from "../components/GovernmentResponseCard";
 
     export default {
         name: "ViewInfo",
-        components: {ViewInfoAppBar, DataTableCard, CardSpacer, KeyInfoCard, Snackbar},
+        components: {GovernmentResponseCard, ViewInfoAppBar, DataTableCard, CardSpacer, KeyInfoCard, Snackbar},
         data() {
             return {
                 archived_petition_snackbar: false,
@@ -45,11 +52,16 @@
                 background: "",
                 additional_info: "",
                 creator: "",
+                created_date: "",
+                opened_date: "",
+                close_date: "",
                 total_signatures: 0,
                 status: "",
-                constituency_search: '',
-                region_search: '',
-                country_search: '',
+                departments: [],
+                government_responded: false,
+                government_response_summary: "",
+                government_response_text: "",
+                government_response_date: "",
                 constituency_headers: [
                     {
                         text: 'Constituency',
@@ -127,6 +139,7 @@
                         this.archived_petition_snackbar = true;
                     }
                     this.getKeyInfo(parsed);
+                    this.getGovernmentResponse(parsed);
                     this.getConstituencyInfo(parsed);
                     this.getRegionInfo(parsed);
                     this.getCountryInfo(parsed);
@@ -141,8 +154,20 @@
                 this.background = parsed.data.attributes.background;
                 this.additional_info = parsed.data.attributes.additional_details;
                 this.creator = parsed.data.attributes.creator_name;
+                this.created_date = new Date(Date.parse(parsed.data.attributes.created_at));
+                this.opened_date = new Date(Date.parse(parsed.data.attributes.opened_at));
                 this.total_signatures = parsed.data.attributes.signature_count;
                 this.status = parsed.data.attributes.state;
+                this.departments = parsed.data.attributes.departments;
+                this.close_date = parsed.data.attributes.closed_at;
+            },
+            getGovernmentResponse(parsed) {
+                if (parsed.data.attributes.government_response !== null) {
+                    this.government_responded = true;
+                    this.government_response_summary = parsed.data.attributes.government_response.summary;
+                    this.government_response_text = parsed.data.attributes.government_response.details;
+                    this.government_response_date = new Date(Date.parse(parsed.data.attributes.government_response.responded_on));
+                }
             },
             getConstituencyInfo(parsed) {
                 const constituencyData = parsed.data.attributes.signatures_by_constituency;
