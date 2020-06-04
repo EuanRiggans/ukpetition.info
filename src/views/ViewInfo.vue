@@ -1,115 +1,18 @@
 <template>
     <div>
-        <v-app-bar
-                color="pink darken-4"
-                dense
-                dark
-                fixed
-        >
-            <v-btn icon to="/">
-                <v-icon>mdi-home</v-icon>
-            </v-btn>
-            <v-toolbar-title>Petition Data for petition ID: {{petition_id}}</v-toolbar-title>
-        </v-app-bar>
+        <ViewInfoAppBar :petition_id="petition_id"/>
         <v-container class="mt-12" fluid>
-            <v-card
-                    max-width="75%"
-                    class="mx-auto"
-                    shaped
-                    elevation="5"
-            >
-                <v-list-item>
-                    <v-list-item-content>
-                        <v-list-item-title class="headline">Petition Key Info:</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-
-                <v-card-text>
-                    <b>Creator:</b> {{creator}}<br/><br/>
-                    <b>Action:</b> {{action}}<br/><br/>
-                    <b>Background:</b> {{background}}<br/><br/>
-                    <b>Additional Info:</b> {{additional_info}}<br/><br/>
-                    <b>Total Signatures:</b> {{total_signatures.toLocaleString()}}<br/><br/>
-                </v-card-text>
-            </v-card>
-            <br>
-            <v-spacer/>
-            <br>
-            <v-card
-                    max-width="75%"
-                    class="mx-auto"
-                    shaped
-                    elevation="5"
-            >
-                <v-card-title>
-                    Signature Constituency Data
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                            v-model="constituency_search"
-                            append-icon="mdi-magnify"
-                            label="Search"
-                            single-line
-                            hide-details
-                    ></v-text-field>
-                </v-card-title>
-                <v-data-table
-                        :headers="constituency_headers"
-                        :items="constituency_data"
-                        :search="constituency_search"
-                ></v-data-table>
-            </v-card>
-            <br>
-            <v-spacer/>
-            <br>
-            <v-card
-                    max-width="75%"
-                    class="mx-auto"
-                    shaped
-                    elevation="5"
-            >
-                <v-card-title>
-                    Signature Region Data
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                            v-model="region_search"
-                            append-icon="mdi-magnify"
-                            label="Search"
-                            single-line
-                            hide-details
-                    ></v-text-field>
-                </v-card-title>
-                <v-data-table
-                        :headers="region_headers"
-                        :items="region_data"
-                        :search="region_search"
-                ></v-data-table>
-            </v-card>
-            <br>
-            <v-spacer/>
-            <br>
-            <v-card
-                    max-width="75%"
-                    class="mx-auto"
-                    shaped
-                    elevation="5"
-            >
-                <v-card-title>
-                    Signature Country Data
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                            v-model="country_search"
-                            append-icon="mdi-magnify"
-                            label="Search"
-                            single-line
-                            hide-details
-                    ></v-text-field>
-                </v-card-title>
-                <v-data-table
-                        :headers="country_headers"
-                        :items="country_data"
-                        :search="country_search"
-                ></v-data-table>
-            </v-card>
+            <KeyInfoCard :action="action" :additional_info="additional_info" :background="background"
+                          :creator="creator" :total_signatures="total_signatures.toLocaleString()" card_max_width="1800px"/>
+            <CardSpacer/>
+            <DataTableCard card_max_width="1800px" table_title="Signature Constituency Data" :table_data="constituency_data" :table_headers="constituency_headers"
+                          :table_search="constituency_search"/>
+            <CardSpacer/>
+            <DataTableCard card_max_width="1800px" table_title="Signature Region Data" :table_data="region_data" :table_headers="region_headers"
+                           :table_search="region_search"/>
+            <CardSpacer/>
+            <DataTableCard card_max_width="1800px" table_title="Signature Country Data" :table_data="country_data" :table_headers="country_headers"
+                           :table_search="country_search"/>
         </v-container>
         <Snackbar :modal="archived_petition_snackbar" color="pink"
                   text="Please note, this petition is archived, so data may be missing or incomplete."
@@ -125,10 +28,14 @@
 <script>
     import axios from 'axios'
     import Snackbar from '../components/Snackbar.vue';
+    import KeyInfoCard from "../components/KeyInfoCard";
+    import CardSpacer from "../components/CardSpacer";
+    import DataTableCard from "../components/DataTableCard";
+    import ViewInfoAppBar from "../components/ViewInfoAppBar";
 
     export default {
         name: "ViewInfo",
-        components: {Snackbar},
+        components: {ViewInfoAppBar, DataTableCard, CardSpacer, KeyInfoCard, Snackbar},
         data() {
             return {
                 archived_petition_snackbar: false,
@@ -295,6 +202,3 @@
     }
 </script>
 
-<style scoped>
-
-</style>
