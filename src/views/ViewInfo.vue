@@ -105,6 +105,10 @@
                   text="Please note, this petition is archived, so data may be missing or incomplete."
                   v-bind:timeout="0"
                   v-on:close-snackbar="closeArchivedPetitionSnackbar"/>
+        <Snackbar :modal="axios_error_snackbar" color="pink"
+                  text="Error when loading petition data. Please ensure your petition ID is correct."
+                  v-bind:timeout="0"
+                  v-on:close-snackbar="closeAxiosErrorSnackbar"/>
     </div>
 </template>
 
@@ -118,12 +122,13 @@
         data() {
             return {
                 archived_petition_snackbar: false,
-                action: null,
-                background: null,
-                additional_info: null,
-                creator: null,
-                total_signatures: null,
-                status: null,
+                axios_error_snackbar: false,
+                action: "",
+                background: "",
+                additional_info: "",
+                creator: "",
+                total_signatures: 0,
+                status: "",
                 constituency_search: '',
                 region_search: '',
                 country_search: '',
@@ -200,13 +205,16 @@
                 .get('https://petition.parliament.uk/petitions/' + this.petition_id + '.json')
                 .then((response) => {
                     const parsed = JSON.parse(JSON.stringify(response.data));
-                    if(parsed.data.type === "archived-petition") {
+                    if (parsed.data.type === "archived-petition") {
                         this.archived_petition_snackbar = true;
                     }
                     this.getKeyInfo(parsed);
                     this.getConstituencyInfo(parsed);
                     this.getRegionInfo(parsed);
                     this.getCountryInfo(parsed);
+                }).catch(error => {
+                    this.axios_error_snackbar = true;
+                    console.log(error);
                 });
         },
         methods: {
@@ -269,6 +277,9 @@
             },
             closeArchivedPetitionSnackbar() {
                 this.archived_petition_snackbar = false;
+            },
+            closeAxiosErrorSnackbar() {
+                this.axios_error_snackbar = false;
             },
         }
     }
