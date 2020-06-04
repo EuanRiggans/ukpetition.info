@@ -17,8 +17,9 @@
                         https://petition.parliament.uk/petitions/<b>308733</b></small><br/>
                 </v-card-text>
                 <v-card-actions>
+                    <v-btn color="blue darken-1" text to="/contact">Contact Me</v-btn>
                     <div class="flex-grow-1"></div>
-                    <v-btn color="blue darken-1" text v-on:click="loadPetitionInfo">Load petition info</v-btn>
+                    <v-btn color="blue darken-1" v-on:click="loadPetitionInfo">Load petition info</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
