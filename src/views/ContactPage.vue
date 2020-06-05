@@ -1,5 +1,5 @@
 <template>
-    <ContactDialog/>
+    <ContactDialog :modal_dialog="dialog_modal" :standalone="true"/>
 </template>
 
 <script>
@@ -8,7 +8,11 @@
     export default {
         name: "ContactPage",
         components: {ContactDialog},
-
+        data() {
+            return {
+                dialog_modal: true,
+            }
+        }
     }
 </script>
 

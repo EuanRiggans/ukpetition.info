@@ -49,11 +49,9 @@
                 default: "Petition Creator"
             },
             created_date: {
-                type: String,
                 default: "00/00/0000"
             },
             opened_date: {
-                type: String,
                 default: "00/00/0000"
             },
             total_signatures: {

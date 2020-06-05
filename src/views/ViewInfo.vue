@@ -21,6 +21,7 @@
             <DataTableCard card_max_width="1800px" table_title="Signature Country Data" :table_data="country_data"
                            :table_headers="country_headers"/>
         </v-container>
+        <ContactDialog :modal_dialog="contact_dialog" v-on:close-dialog="contact_dialog = false"/>
         <Snackbar :modal="archived_petition_snackbar" color="pink"
                   text="Please note, this petition is archived, so data may be missing or incomplete."
                   v-bind:timeout="0"
@@ -29,23 +30,36 @@
                   text="Error when loading petition data. Please ensure your petition ID is correct."
                   v-bind:timeout="0"
                   v-on:close-snackbar="closeAxiosErrorSnackbar"/>
+        <PageFooter :contact_dialog="contact_dialog" v-on:open-dialog="contact_dialog = true"/>
     </div>
 </template>
 
 <script>
     import axios from 'axios'
+    import ContactDialog from '../components/ContactDialog';
     import Snackbar from '../components/Snackbar.vue';
     import KeyInfoCard from "../components/KeyInfoCard";
     import CardSpacer from "../components/CardSpacer";
     import DataTableCard from "../components/DataTableCard";
     import ViewInfoAppBar from "../components/ViewInfoAppBar";
     import GovernmentResponseCard from "../components/GovernmentResponseCard";
+    import PageFooter from "../components/Footer";
 
     export default {
         name: "ViewInfo",
-        components: {GovernmentResponseCard, ViewInfoAppBar, DataTableCard, CardSpacer, KeyInfoCard, Snackbar},
+        components: {
+            PageFooter,
+            GovernmentResponseCard,
+            ViewInfoAppBar,
+            DataTableCard,
+            CardSpacer,
+            KeyInfoCard,
+            Snackbar,
+            ContactDialog
+        },
         data() {
             return {
+                contact_dialog: false,
                 archived_petition_snackbar: false,
                 axios_error_snackbar: false,
                 action: "",

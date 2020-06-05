@@ -31,7 +31,6 @@
                 default: "Government Response"
             },
             response_date: {
-                type: String,
                 default: "00/00/0000"
             },
             card_max_width: {

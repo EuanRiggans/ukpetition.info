@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-dialog v-model="dialog" persistent max-width="600px">
+        <v-dialog v-model="modal_dialog" persistent max-width="600px">
             <v-card>
                 <v-card-title>
                     <span class="headline">Contact Webmaster</span>
@@ -31,7 +31,8 @@
                     </v-container>
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn color="blue darken-1" text to="/">Home</v-btn>
+                    <v-btn v-if="standalone === false" color="red darken-1" v-on:click="closeDialog">Close</v-btn>
+                    <v-btn v-if="standalone === true" color="red darken-1" to="/">Close</v-btn>
                     <div class="flex-grow-1"></div>
                     <v-btn color="blue darken-1" v-on:click="submitForm">Submit</v-btn>
                 </v-card-actions>
@@ -47,20 +48,33 @@
     import Snackbar from '../components/Snackbar.vue';
 
     export default {
-        name: 'PetitionIDInputDialog',
+        name: 'ContactDialog',
         components: {Snackbar},
         data() {
             return {
-                dialog: true,
                 contact_name: "",
                 contact_email: "",
                 contact_message: "",
                 thanks_snackbar: false,
             };
         },
+        props: {
+            modal_dialog: {
+                type: Boolean,
+                default: false,
+                required: true
+            },
+            standalone: {
+                type: Boolean,
+                default: false
+            }
+        },
         methods: {
             submitForm() {
                 document.getElementById('contact-form').submit();
+            },
+            closeDialog() {
+                this.$emit('close-dialog');
             },
             closeThanksSnackbar() {
                 this.thanks_snackbar = false;
