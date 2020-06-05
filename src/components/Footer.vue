@@ -13,13 +13,6 @@
                 <v-btn
                         class="mx-3 white--text"
                         icon
-                        href="https://github.com/EuanRiggans/ukpetition.info"
-                >
-                    <v-icon size="24px">mdi-github</v-icon>
-                </v-btn>
-                <v-btn
-                        class="mx-3 white--text"
-                        icon
                         v-on:click="openDialog"
                 >
                     <v-icon size="24px">mdi-email</v-icon>
