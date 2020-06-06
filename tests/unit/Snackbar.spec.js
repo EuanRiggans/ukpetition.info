@@ -1,3 +1,5 @@
+// tests/unit/Snackbar.spec.js
+
 import {shallowMount} from '@vue/test-utils'
 import Snackbar from '@/components/Snackbar.vue'
 import Vuetify from 'vuetify'
