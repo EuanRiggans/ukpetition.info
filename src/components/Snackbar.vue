@@ -17,9 +17,21 @@
     export default {
         name: 'Snackbar',
         props: {
-            modal: null,
-            text: null,
-            color: null,
+            modal: {
+                type: Boolean,
+                default: false,
+                required: true
+            },
+            text: {
+                type: String,
+                default: "Snackbar Text",
+                required: true
+            },
+            color: {
+                type: String,
+                default: "blue",
+                required: false
+            },
             timeout: {
                 type: Number,
                 default: 6000
