@@ -122,3 +122,5 @@ typings/
 # Recommended template: Node.gitignore
 
 src/config/firebaseConfig.js
+
+tests/unit/__snapshots__
