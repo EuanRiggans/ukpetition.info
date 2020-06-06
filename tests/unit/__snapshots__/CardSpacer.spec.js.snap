@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardSpacer.vue should have a custom title and match snapshot 1`] = `
+<div><br>
+  <div class="spacer"></div> <br>
+</div>
+`;
