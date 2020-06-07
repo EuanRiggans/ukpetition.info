@@ -23,7 +23,7 @@ describe('CardSpacer.vue', () => {
         vuetify = new Vuetify()
     })
 
-    it('should have a custom title and match snapshot', () => {
+    it('should match snapshot', () => {
         const wrapper = mount(CardSpacer, {
             localVue,
             vuetify,
