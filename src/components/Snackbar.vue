@@ -1,16 +1,19 @@
 <template>
     <v-snackbar
             v-model="modal"
-            :timeout="timeout"
     >
         {{ text }}
-        <v-btn
-                :color="color"
-                text
-                @click="closeSnackbar"
-        >
-            Close
-        </v-btn>
+
+        <template v-slot:action="{ attrs }">
+            <v-btn
+                    color="pink"
+                    text
+                    v-bind="attrs"
+                    @click="closeSnackbar"
+            >
+                Close
+            </v-btn>
+        </template>
     </v-snackbar>
 </template>
 <script>
