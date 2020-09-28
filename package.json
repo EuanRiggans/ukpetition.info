@@ -14,7 +14,7 @@
     "core-js": "^3.6.5",
     "firebase": "^7.21.1",
     "vue": "^2.6.12",
-    "vue-router": "^3.4.4",
+    "vue-router": "^3.4.5",
     "vuetify": "^2.3.10"
   },
   "devDependencies": {
