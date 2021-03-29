@@ -12,7 +12,7 @@
         </v-list-item>
 
         <v-card-text>
-            <b>Creator:</b> {{creator}}<br/><br/>
+            <b>Creator:</b> {{creator === null ? "No creator name found" : creator }}<br/><br/>
             <b>Petition Created:</b> {{created_date}}<br/><br/>
             <b>Petition Opened:</b> {{opened_date}}<br/><br/>
             <b>Action:</b> {{action}}<br/><br/>
