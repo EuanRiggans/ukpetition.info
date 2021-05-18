@@ -15,7 +15,7 @@
     "firebase": "^8.6.1",
     "vue": "^2.6.12",
     "vue-router": "^3.5.1",
-    "vuetify": "^2.4.11"
+    "vuetify": "^2.5.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.13",
