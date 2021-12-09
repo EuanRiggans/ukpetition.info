@@ -10,7 +10,7 @@
     "deploy": "npm run build && firebase deploy"
   },
   "dependencies": {
-    "axios": "^0.22.0",
+    "axios": "^0.24.0",
     "core-js": "^3.19.3",
     "firebase": "^9.1.2",
     "vue": "^2.6.14",
