@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "core-js": "^3.23.3",
+    "core-js": "^3.23.4",
     "firebase": "^9.8.4",
     "vue": "^2.7.2",
     "vue-router": "^3.5.4",
